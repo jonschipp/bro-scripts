@@ -3,7 +3,7 @@
 # 	To use:
 # 		1. Add script to configuration local.bro: $ echo '@load syslog-outbound.bro' >> $BROPREFIX/share/bro/site/local.bro
 # 		2. Copy script to $BROPREFIX/share/bro/site
-# 		3. broctl check && broctl install && broctl restart
+# 		3. $ broctl check && broctl install && broctl restart
 
 @load base/frameworks/notice
 
