@@ -36,7 +36,7 @@ event udp_request(u: connection)
         if ( u$id$orig_h !in time_exclude && u$id$resp_h !in time_servers && u$id$resp_p == 123/udp )
                 {
                 NOTICE([$note=NTP::Query_Sent_To_Wrong_Server,
-                $msg="NTP query destined to non-TOC NTP servers", $conn=u,
+                $msg="NTP query destined to non-defined NTP servers", $conn=u,
                 $identifier=cat(u$id$orig_h),
                 $suppress_for=1day]);
                 }
