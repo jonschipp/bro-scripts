@@ -61,6 +61,11 @@ export {
 
 event ntp_message(u: connection, msg: ntp_msg, excess: string)
         {
+
+	 # Exit event handler if originator is not in networks.cfg
+	if (! Site::is_local_addr(u$id$orig_h) )
+		return;
+
         if ( u$id$orig_h !in time_exclude && u$id$resp_h !in time_servers )
                 {
                 NOTICE([$note=Query_Sent_To_Wrong_Server,
