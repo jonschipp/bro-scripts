@@ -50,6 +50,10 @@ export {
         192.168.1.251,
         } &redef;
 
+	const subnet_exclude: set[subnet] = {
+        192.168.2.0/24, # Exclude mobile network
+        } &redef;
+
         # List any source addresses that should be excluded
         const time_exclude: set[addr] = {
         192.168.1.250,
@@ -65,6 +69,9 @@ event ntp_message(u: connection, msg: ntp_msg, excess: string)
 	 # Exit event handler if originator is not in networks.cfg
 	if (! Site::is_local_addr(u$id$orig_h) )
 		return;
+
+	if ( u$id$orig_h in subnet_exclude )
+                return;
 
         if ( u$id$orig_h !in time_exclude && u$id$resp_h !in time_servers )
                 {
