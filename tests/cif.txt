@@ -1,0 +1,11 @@
+#fields host    net     str     str_type        meta.source     meta.desc       meta.url        meta.cif_impact meta.cif_severity       meta.cif_confidence
+206.210.124.37  -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+119.84.71.133   -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+222.239.255.73  -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+103.9.88.88     -       -       -       CIF - need-to-know      ssh     http://dragonresearchgroup.org/insight/sshpwauth.txt (public)   -       medium  85
+27.1.217.20     -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+114.135.15.242  -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+222.90.25.218   -       -       -       CIF - need-to-know      ssh     http://dragonresearchgroup.org/insight/sshpwauth.txt (public)   -       medium  85
+185.23.226.16   -       -       -       CIF - need-to-know      vnc     https://dragonresearchgroup.org/insight/vncprobe.txt (public)   -       medium  85
+173.244.170.10  -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85
+117.6.174.35    -       -       -       CIF - need-to-know      ssh     http://danger.rulez.sk/projects/bruteforceblocker/blist.php (public)    -       medium  85

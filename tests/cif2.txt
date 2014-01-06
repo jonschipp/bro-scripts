@@ -1,0 +1,3 @@
+#fields	indicator	indicator_type	meta.source
+google.com     Intel::DOMAIN   testing_source	-
+10.16.92.103.80	Intel::ADDR	testing_source	-
