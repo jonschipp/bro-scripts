@@ -7,7 +7,7 @@
 #               2. Copy script to $BROPREFIX/share/bro/site
 #               3. $ broctl check && broctl install && broctl restart
 # Testing: 
-# mausezahn -t syslog severity=7,facility=24,host=mausezahn -P "Invalid PRI message test" -B 141.142.148.91
+# mausezahn -t syslog severity=7,facility=24,host=mausezahn -P "Invalid PRI message test" -B 10.1.1.100
 # 
 # Facility: Divide the PRI number by 8. 
 # 191/8 = 23
@@ -29,7 +29,7 @@ export {
 
         # List your NTP servers here    
         const syslog_servers: set[addr] = {
-        141.142.148.91
+	10.1.1.100
         } &redef;
 
 }
