@@ -46,7 +46,7 @@ event syslog_message(c: connection, facility: count, severity: count, msg: strin
 
 	local pri = (facility * 8) + severity;
 
-        if (facility > 23 && facility < 127)
+        if (facility > 23 && facility < 128)
                 {
                 NOTICE([$note=SYSLOG::Invalid_PRI,
 		$msg=fmt("Syslog message with invalid PRI of %d", pri),
