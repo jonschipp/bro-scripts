@@ -15,7 +15,7 @@ export {
 		uid:    string  &log;
 		## The connection's 4-tuple of endpoint addresses/ports.
 		id:     conn_id &log;
-		
+
 		# ## TODO: Add other fields here that you'd like to log.
 	};
 
@@ -37,7 +37,7 @@ event bro_init() &priority=5
 	Log::create_stream(Rip::LOG, [$columns=Info, $ev=log_rip, $path="rip"]);
 
 	# TODO: If you're using port-based DPD, uncomment this.
-	# Analyzer::register_for_ports(Analyzer::ANALYZER_RIP, ports);
+	Analyzer::register_for_ports(Analyzer::ANALYZER_RIP, ports);
 	}
 
 event rip_event(c: connection)

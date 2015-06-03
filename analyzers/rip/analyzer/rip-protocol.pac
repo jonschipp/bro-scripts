@@ -6,22 +6,16 @@
 # RIP Request  - request for the responding system to send all or part of its routing table.
 # RIP Response - message containing all or part of the senders routing table
 
-enum Rip_type {
+enum Rip_Command {
         RIP_REQUEST     = 1,
         RIP_RESPONSE    = 2,
 };
 
 type Rip_Message = record {
-        # Dont know about this
-	#command : case command of {
-        #        RIP_REQUEST   -> request  : uint8 &check(command == 0x01)
-        #        RIP_RESPONSE  -> response : uint8 &check(command == 0x02)
-        #};
         command : uint8 &check(command == 0x01 || command == 0x02);
-	version : uint8 &check(version == 0x01 || version == 0x02);
-	entry   : Rip_Entry &restofdata;
+        version : uint8 &check(version == 0x01 || version == 0x02);
+        entry   : Rip_Entry[] &until($input.length() == 0);
 } &byteorder = littleendian;
-
 
 type Rip_Entry = record {
         af      : uint16 &check(af == 0x0002 || af == 0xFFFF); # AddressFamily
@@ -33,8 +27,10 @@ type Rip_Entry = record {
 }
 
 type RIP_PDU(is_orig: bool) = record {
-	data: bytestring &restofdata;
-} &byteorder=littleendian;
+        command : uint8 &check(command == 0x01 || command == 0x02);
+        version : uint8 &check(version == 0x01 || version == 0x02);
+        entry   : Rip_Entry[] &until($input.length() == 0);
+} &byteorder=bigendian;
 
 #  0                   1                   2                   3
 #  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
