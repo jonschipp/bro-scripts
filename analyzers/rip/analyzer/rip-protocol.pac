@@ -11,6 +11,11 @@ enum Rip_Command {
         RIP_RESPONSE    = 2,
 };
 
+enum Rip_Version {
+        RIP_V1     = 1,
+        RIP_V2     = 2,
+};
+
 type Rip_Message = record {
         command : uint8 &check(command == 0x01 || command == 0x02);
         version : uint8 &check(version == 0x01 || version == 0x02);

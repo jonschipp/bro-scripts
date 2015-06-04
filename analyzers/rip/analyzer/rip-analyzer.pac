@@ -7,13 +7,13 @@ refine flow RIP_Flow += {
                 %{
 
                 # Check for two possible versions
-                if ( ${msg.version} != 0x01 || ${msg.version} != 0x02 )
+                if ( ${msg.version} != RIP_V1 || ${msg.version} != RIP_V2 )
                         {
                         connection()->bro_analyzer()->ProtocolViolation("Invalid RIP version");
                         return false;
                         }
 
-                if ( ${msg.command} == 0x01 )
+                if ( ${msg.command} == RIP_REQUEST )
                         {
                         BifEvent::generate_rip_request(connection()->bro_analyzer(), connection()->bro_analyzer()->Conn(),
                         ${msg.command},
@@ -21,7 +21,7 @@ refine flow RIP_Flow += {
                         return true;
                         }
 
-                if ( ${msg.command} == 0x02 )
+                if ( ${msg.command} == RIP_RESPONSE )
                         {
                         BifEvent::generate_rip_response(connection()->bro_analyzer(), connection()->bro_analyzer()->Conn(),
                         ${msg.command},
