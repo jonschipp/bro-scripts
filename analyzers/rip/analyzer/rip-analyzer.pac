@@ -5,6 +5,20 @@ refine flow RIP_Flow += {
 
         function proc_rip_message(msg: RIP_PDU): bool
                 %{
+                # Test for two possible command types
+                if ( ${msg.command} != 0x01 || ${msg.command} != 0x02 )
+                        {
+                        connection()->bro_analyzer()->ProtocolViolation("Invalid RIP command");
+                        return false;
+                        }
+
+                # Check for two possible versions
+                if ( ${msg.version} != 0x01 || ${msg.version} != 0x02 )
+                        {
+                        connection()->bro_analyzer()->ProtocolViolation("Invalid RIP version");
+                        return false;
+                        }
+
                 BifEvent::generate_rip_event(connection()->bro_analyzer(), connection()->bro_analyzer()->Conn(),
                 ${msg.command},
                 ${msg.version});
