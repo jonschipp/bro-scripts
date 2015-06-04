@@ -8,6 +8,5 @@
 ##
 ## c: The connection
 ##
-event rip_event%(c: connection, command: count, version: count%);
-#event rip_request%(c: connection%);
-#event rip_response%(c: connection%);
+event rip_request%(c: connection, command: count, version: count%);
+event rip_response%(c: connection, command: count, version: count%);
