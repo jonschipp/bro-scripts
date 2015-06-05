@@ -15,8 +15,12 @@ export {
 		uid:    string  &log;
 		## The connection's 4-tuple of endpoint addresses/ports.
 		id:     conn_id &log;
-
-		# ## TODO: Add other fields here that you'd like to log.
+                ## Type of request
+                command: string  &log;
+                ## Type of update
+                update:    string  &log;
+                ## Version of protocol
+                version: count &log;
 	};
 
 	## Event that can be handled to access the RIP record as it is sent on
@@ -40,12 +44,37 @@ event bro_init() &priority=5
 	Analyzer::register_for_ports(Analyzer::ANALYZER_RIP, ports);
 	}
 
-event rip_event(c: connection)
-	{
-	local info: Info;
-	info$ts  = network_time();
-	info$uid = c$uid;
-	info$id  = c$id;
+event rip_request(c: connection, command: count, version: count) &priority=-5
+        {
+        local info: Info;
+        local solicitation: count;
+        info$ts       = network_time();
+        info$uid      = c$uid;
+        info$id       = c$id;
+        info$version  = version;
+        info$command  = command_types[command];
+        if ( c$id$orig_p == c$id$resp_p )
+                solicitation = 1;
+        else
+                solicitation = 2;
+        info$update  = update_types[solicitation];
+        Log::write(RIP::LOG, info);
+        }
 
-	Log::write(Rip::LOG, info);
-	}
+event rip_response(c: connection, command: count, version: count) &priority=-5
+        {
+        local info: Info;
+        local solicitation: count;
+        info$ts  = network_time();
+        info$uid = c$uid;
+        info$id  = c$id;
+        info$command  = command_types[command];
+        info$version  = version;
+
+        if ( c$id$orig_p == c$id$resp_p )
+                solicitation = 1;
+        else
+                solicitation = 2;
+        info$update  = update_types[solicitation];
+        Log::write(RIP::LOG, info);
+        }

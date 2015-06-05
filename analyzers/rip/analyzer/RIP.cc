@@ -30,7 +30,7 @@ void RIP_Analyzer::Done()
 	}
 
 void RIP_Analyzer::DeliverPacket(int len, const u_char* data,
-	 			  bool orig, int seq, const IP_Hdr* ip, int caplen)
+	 			  bool orig, uint64 seq, const IP_Hdr* ip, int caplen)
 	{
 	Analyzer::DeliverPacket(len, data, orig, seq, ip, caplen);
 

@@ -9,6 +9,9 @@
 enum Rip_Command {
         RIP_REQUEST     = 1,
         RIP_RESPONSE    = 2,
+        RIP_TRACEON     = 3,
+        RIP_TRACEOFF    = 4,
+        RIP_RESERVED    = 5,
 };
 
 enum Rip_Version {
@@ -17,7 +20,7 @@ enum Rip_Version {
 };
 
 type Rip_Message = record {
-        command : uint8 &check(command == 0x01 || command == 0x02);
+        command : uint8;
         version : uint8 &check(version == 0x01 || version == 0x02);
         entry   : Rip_Entry[] &until($input.length() == 0);
 } &byteorder = littleendian;
@@ -32,8 +35,9 @@ type Rip_Entry = record {
 }
 
 type RIP_PDU(is_orig: bool) = record {
-        command : uint8 &check(command == 0x01 || command == 0x02);
+        command : uint8;
         version : uint8 &check(version == 0x01 || version == 0x02);
+        pad     : padding[2];
         entry   : Rip_Entry[] &until($input.length() == 0);
 } &byteorder=bigendian;
 

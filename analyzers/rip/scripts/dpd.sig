@@ -2,7 +2,6 @@
 
 signature dpd_rip {
 	ip-proto == udp
-        dst-port == 520
 	payload /^(\x01|\x02)(\x01|\x02)\x00\x00/
 	enable "rip"
 }

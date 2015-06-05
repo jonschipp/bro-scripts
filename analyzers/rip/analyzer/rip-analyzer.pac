@@ -6,8 +6,8 @@ refine flow RIP_Flow += {
 
                 %{
 
-                # Check for two possible versions
-                if ( ${msg.version} != RIP_V1 || ${msg.version} != RIP_V2 )
+                // Check for two possible versions
+                if ( ${msg.version} != RIP_V1 && ${msg.version} != RIP_V2 )
                         {
                         connection()->bro_analyzer()->ProtocolViolation("Invalid RIP version");
                         return false;
@@ -27,6 +27,11 @@ refine flow RIP_Flow += {
                         ${msg.command},
                         ${msg.version});
                         return true;
+                        }
+
+                if ( ${msg.command} >= RIP_TRACEON && ${msg.command} <= RIP_RESERVED )
+                        {
+                        connection()->bro_analyzer()->Weird("obsolete_rip_command");
                         }
 
                 connection()->bro_analyzer()->ProtocolViolation("Invalid RIP command");
